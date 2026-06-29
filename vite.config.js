@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Relative base so the build works under any path — including a GitHub Pages
+  // project site at /math-workouts/ — without hard-coding the repo name.
+  base: './',
   plugins: [react()],
   server: {
     host: true,
