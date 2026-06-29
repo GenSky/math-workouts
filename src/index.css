@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-ink text-chalk font-sans antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(198, 255, 58, 0.06), transparent 40%),
+      radial-gradient(circle at 85% 100%, rgba(91, 140, 255, 0.06), transparent 40%);
+    background-attachment: fixed;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Hard, blocky scrollbar to match the brutalist theme */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2c2c34;
+    border: 2px solid #0a0a0b;
+  }
+}
+
+@layer components {
+  /* The signature brutalist block: hard border + offset shadow */
+  .brutal-box {
+    @apply border-2 border-border bg-slate shadow-brutal-sm;
+  }
+
+  .brutal-btn {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-black bg-chalk px-5 py-3
+           font-bold uppercase tracking-wide text-ink shadow-brutal-sm transition-all
+           active:translate-x-[3px] active:translate-y-[3px] active:shadow-none
+           disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .brutal-btn-lime {
+    @apply brutal-btn bg-lime;
+  }
+  .brutal-btn-flame {
+    @apply brutal-btn bg-flame text-chalk;
+  }
+  .brutal-btn-ghost {
+    @apply brutal-btn border-border bg-transparent text-chalk shadow-none active:translate-x-0 active:translate-y-0;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1 border border-border px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ghost;
+  }
+
+  .section-num {
+    @apply flex h-9 w-9 shrink-0 items-center justify-center border-2 border-black bg-lime font-display text-lg text-ink shadow-brutal-sm;
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1.5px #000;
+  }
+  .pad-safe-b {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+}
