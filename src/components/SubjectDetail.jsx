@@ -1,17 +1,18 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getSubject, PASS_THRESHOLD } from '../data/subjects.js'
-import { lessonsForSubject } from '../data/lessons/index.js'
+import { getLesson, lessonsForSubject } from '../data/lessons/index.js'
 import { useProgress } from '../context/ProgressContext.jsx'
 import MaxSays from './MaxSays.jsx'
 
 export default function SubjectDetail() {
   const { subjectId } = useParams()
   const navigate = useNavigate()
-  const { completedLessons, lessonScores, subjectProgress } = useProgress()
+  const { completedLessons, lessonScores, subjectProgress, isSubjectUnlocked } = useProgress()
   const subject = getSubject(subjectId)
   const lessons = lessonsForSubject(subjectId)
   const prog = subjectProgress(subjectId)
+  const unlocked = subject && isSubjectUnlocked(subject.id)
 
   if (!subject) {
     return (
@@ -48,6 +49,17 @@ export default function SubjectDetail() {
           </div>
         )}
       </div>
+
+      {!unlocked && (
+        <div className="mb-5">
+          <MaxSays tone="info">
+            You're scouting ahead — respect the ambition. Every lesson here shows what it{' '}
+            <span className="text-gold">builds on</span>. Jump into anything: if you're missing a
+            foundation, I'll offer to walk you up through the prerequisites first, in the right
+            order, then bring you back.
+          </MaxSays>
+        </div>
+      )}
 
       {lessons.length === 0 ? (
         <MaxSays tone="info">
@@ -99,6 +111,28 @@ export default function SubjectDetail() {
                         </span>
                       )}
                     </div>
+                    {lesson.prereqs?.length > 0 && (
+                      <div className="mt-1.5 flex flex-wrap items-center gap-1">
+                        <span className="font-mono text-[9px] uppercase tracking-widest text-ghost">
+                          builds on
+                        </span>
+                        {lesson.prereqs.map((pid) => {
+                          const p = getLesson(pid)
+                          if (!p) return null
+                          const pDone = completedLessons.includes(pid)
+                          return (
+                            <span
+                              key={pid}
+                              className={`inline-flex items-center gap-0.5 border px-1 py-px font-mono text-[9px] ${
+                                pDone ? 'border-lime/50 text-lime' : 'border-gold/50 text-gold'
+                              }`}
+                            >
+                              {pDone ? '✓' : '○'} {p.title}
+                            </span>
+                          )
+                        })}
+                      </div>
+                    )}
                   </div>
                   <span className="font-display text-lg text-ghost">›</span>
                 </motion.button>

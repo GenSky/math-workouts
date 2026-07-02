@@ -19,6 +19,9 @@ const DEFAULT = {
   bossWins: 0,
   resets: 0,
   voiceEnabled: false,
+  // Active catch-up path: the lesson id the learner is climbing toward via
+  // its prerequisite chain (null when not on a path).
+  pathTarget: null,
 }
 
 const ProgressContext = createContext(null)
@@ -252,6 +255,18 @@ export function ProgressProvider({ children }) {
     [setState],
   )
 
+  // Catch-up path: aim the learner at an advanced lesson; the UI walks them
+  // through its unfinished prerequisites in order until the target is done.
+  const startPath = useCallback(
+    (targetLessonId) => setState((prev) => ({ ...prev, pathTarget: targetLessonId })),
+    [setState],
+  )
+
+  const clearPath = useCallback(
+    () => setState((prev) => ({ ...prev, pathTarget: null })),
+    [setState],
+  )
+
   const resetAll = useCallback(() => {
     setState(DEFAULT)
     setPendingBadges([])
@@ -280,6 +295,8 @@ export function ProgressProvider({ children }) {
       completeLesson,
       recordBossWin,
       setVoiceEnabled,
+      startPath,
+      clearPath,
       resetAll,
       dismissBadge,
     }),
@@ -299,6 +316,8 @@ export function ProgressProvider({ children }) {
       completeLesson,
       recordBossWin,
       setVoiceEnabled,
+      startPath,
+      clearPath,
       resetAll,
       dismissBadge,
     ],

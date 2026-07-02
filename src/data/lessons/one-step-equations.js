@@ -7,6 +7,25 @@ export default {
   icon: '⚖️',
   estMinutes: 10,
   tagline: 'Keep the scale balanced and isolate the suspect.',
+  prereqs: ['variables'],
+
+  plainIdea:
+    'Solving an equation means getting the variable alone on one side to reveal its value. The one rule: an equation is a balance scale — whatever you do to one side, you must do to the other.',
+
+  vocab: [
+    {
+      term: 'solve',
+      means: 'Find the number the variable is hiding. "Solve for x" = "open the locker."',
+    },
+    {
+      term: 'isolate',
+      means: 'Get the variable completely alone on one side of the equals sign: from x + 7 = 12 to x = 5.',
+    },
+    {
+      term: 'inverse operation',
+      means: 'The undo move: subtraction undoes addition, division undoes multiplication. The key that peels things off the variable.',
+    },
+  ],
 
   hook: "You're negotiating a salary. Every year you stay, you get $3K more, and you want to know exactly how many years until you hit a $15K raise. One equation, one move, one answer. That's a one-step equation.",
 

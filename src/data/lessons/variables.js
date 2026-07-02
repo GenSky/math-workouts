@@ -7,6 +7,29 @@ export default {
   icon: '🔓',
   estMinutes: 8,
   tagline: 'The locker that always holds the same thing.',
+  prereqs: ['order-of-operations'],
+
+  plainIdea:
+    'A variable is a letter (like x) standing in for a number we don\'t know yet. It\'s not scary — it\'s just a labeled box with a number hiding inside, and algebra is the game of figuring out what\'s in the box.',
+
+  vocab: [
+    {
+      term: 'variable',
+      means: 'A letter that stands in for a number — unknown for now, but findable. The x in x + 3 = 10.',
+    },
+    {
+      term: 'coefficient',
+      means: 'The number stuck to a variable by multiplication. In 4x, the 4 — it means "four of the thing called x."',
+    },
+    {
+      term: 'expression',
+      means: 'A math phrase built from numbers, variables, and operations, like 4x or t + 5. No equals sign yet.',
+    },
+    {
+      term: 'equation',
+      means: 'Two expressions declared equal, like 4x = 20. It\'s a complete sentence: "four x\'s make twenty."',
+    },
+  ],
 
   hook: "You walk into a gym you've never been to. Locker #47 has your stuff in it — your phone, your keys, your life. You don't know what's inside until you open it, but #47 always points to the same locker. That number is a variable.",
 

@@ -11,7 +11,7 @@ export const SUBJECTS = [
     blurb: 'Fractions, negatives, and the grammar of numbers.',
     color: '#5b8cff',
     emoji: '🧱',
-    topics: ['number-line', 'fractions-disguise'],
+    topics: ['number-line', 'order-of-operations', 'fractions-disguise'],
   },
   {
     id: 'algebra-1',
@@ -38,7 +38,7 @@ export const SUBJECTS = [
     blurb: 'Shapes, proofs, and the theorem your GPS lives by.',
     color: '#ff5e3a',
     emoji: '📐',
-    topics: ['pythagoras', 'area-perimeter'],
+    topics: ['area-perimeter', 'pythagoras'],
   },
   {
     id: 'trigonometry',
@@ -65,7 +65,7 @@ export const SUBJECTS = [
     blurb: 'How spread out, how likely, how sure.',
     color: '#c6ff3a',
     emoji: '🎲',
-    topics: ['standard-deviation', 'probability'],
+    topics: ['probability', 'standard-deviation'],
   },
   {
     id: 'calculus-1',
