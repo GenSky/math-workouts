@@ -50,6 +50,9 @@ jobs:
 
   deploy:
     needs: build
+    # The github-pages environment only allows deploys from main, so branch
+    # runs build (as CI) but skip the publish step instead of failing it.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
