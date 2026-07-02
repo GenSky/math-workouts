@@ -2,7 +2,7 @@
 export default {
   id: 'slope-intercept',
   subjectId: 'algebra-1',
-  order: 3,
+  order: 5,
   title: 'Graphing a Line (Slope-Intercept)',
   icon: '📈',
   estMinutes: 12,

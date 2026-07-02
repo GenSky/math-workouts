@@ -2,12 +2,12 @@
 export default {
   id: 'chain-rule',
   subjectId: 'calculus-1',
-  order: 2,
+  order: 3,
   title: 'The Chain Rule: Rates Multiply',
   icon: '⛓️',
   estMinutes: 12,
   tagline: 'A function inside a function? Multiply the rates.',
-  prereqs: ['derivatives', 'functions'],
+  prereqs: ['power-rule', 'functions'],
 
   plainIdea:
     'The chain rule finds the derivative of a function INSIDE another function — like (3x)², where "3x" is fed into the squaring machine. The rule: multiply the outer machine\'s rate by the inner machine\'s rate. Rates multiply.',

@@ -2,12 +2,12 @@
 export default {
   id: 'unit-circle',
   subjectId: 'trigonometry',
-  order: 1,
+  order: 2,
   title: 'The Unit Circle',
   icon: '🎡',
   estMinutes: 12,
   tagline: 'One circle, radius 1. All of trig lives on it.',
-  prereqs: ['pythagoras', 'slope-intercept'],
+  prereqs: ['right-triangle-trig', 'slope-intercept'],
 
   plainIdea:
     'The unit circle is a circle of radius 1 drawn around the point (0,0). Imagine a point walking counterclockwise around its edge — describing WHERE that point is, using angles and coordinates, is what trigonometry actually is.',

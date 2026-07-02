@@ -2,7 +2,7 @@
 export default {
   id: 'sine-cosine',
   subjectId: 'trigonometry',
-  order: 2,
+  order: 3,
   title: 'Sine & Cosine: The Coordinates',
   icon: '🌊',
   estMinutes: 12,

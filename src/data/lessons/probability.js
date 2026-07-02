@@ -2,7 +2,7 @@
 export default {
   id: 'probability',
   subjectId: 'statistics',
-  order: 1,
+  order: 2,
   title: 'Probability: Counting Your Chances',
   icon: '🎲',
   estMinutes: 10,

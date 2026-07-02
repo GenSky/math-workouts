@@ -2,7 +2,7 @@
 export default {
   id: 'area-perimeter',
   subjectId: 'geometry',
-  order: 1,
+  order: 2,
   title: 'Area & Perimeter: Fence vs. Grass',
   icon: '🏡',
   estMinutes: 9,

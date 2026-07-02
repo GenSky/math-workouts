@@ -11,7 +11,7 @@ export const SUBJECTS = [
     blurb: 'Fractions, negatives, and the grammar of numbers.',
     color: '#5b8cff',
     emoji: '🧱',
-    topics: ['number-line', 'order-of-operations', 'fractions-disguise'],
+    topics: ['number-line', 'order-of-operations', 'fractions-disguise', 'decimals-percents', 'ratios-proportions'],
   },
   {
     id: 'algebra-1',
@@ -20,7 +20,7 @@ export const SUBJECTS = [
     blurb: 'Variables, equations, and the line that started it all.',
     color: '#c6ff3a',
     emoji: '🕵️',
-    topics: ['variables', 'one-step-equations', 'slope-intercept'],
+    topics: ['variables', 'one-step-equations', 'two-step-equations', 'distributive-property', 'slope-intercept'],
   },
   {
     id: 'algebra-2',
@@ -29,7 +29,7 @@ export const SUBJECTS = [
     blurb: 'Quadratics, exponents on steroids, and curves that bite back.',
     color: '#b06bff',
     emoji: '📈',
-    topics: ['exponents', 'quadratics'],
+    topics: ['exponents', 'quadratics', 'factoring', 'exponential-growth'],
   },
   {
     id: 'geometry',
@@ -38,7 +38,7 @@ export const SUBJECTS = [
     blurb: 'Shapes, proofs, and the theorem your GPS lives by.',
     color: '#ff5e3a',
     emoji: '📐',
-    topics: ['area-perimeter', 'pythagoras'],
+    topics: ['angles-triangles', 'area-perimeter', 'pythagoras', 'circles'],
   },
   {
     id: 'trigonometry',
@@ -47,7 +47,7 @@ export const SUBJECTS = [
     blurb: 'A point walks around a circle. That walk is sine and cosine.',
     color: '#ffc83a',
     emoji: '🔺',
-    topics: ['unit-circle', 'sine-cosine'],
+    topics: ['right-triangle-trig', 'unit-circle', 'sine-cosine', 'radians'],
   },
   {
     id: 'pre-calculus',
@@ -56,7 +56,7 @@ export const SUBJECTS = [
     blurb: 'Functions warming up for the main event.',
     color: '#5b8cff',
     emoji: '🌉',
-    topics: ['functions', 'limits-intro'],
+    topics: ['functions', 'transformations', 'logarithms', 'limits-intro'],
   },
   {
     id: 'statistics',
@@ -65,7 +65,7 @@ export const SUBJECTS = [
     blurb: 'How spread out, how likely, how sure.',
     color: '#c6ff3a',
     emoji: '🎲',
-    topics: ['probability', 'standard-deviation'],
+    topics: ['mean-median-mode', 'probability', 'standard-deviation', 'normal-distribution'],
   },
   {
     id: 'calculus-1',
@@ -74,7 +74,7 @@ export const SUBJECTS = [
     blurb: 'Derivatives: you already do this when you drive.',
     color: '#b06bff',
     emoji: '🏎️',
-    topics: ['derivatives', 'chain-rule'],
+    topics: ['derivatives', 'power-rule', 'chain-rule', 'max-min'],
   },
   {
     id: 'calculus-2',
@@ -83,7 +83,7 @@ export const SUBJECTS = [
     blurb: 'Integrals: adding up infinite tiny slices.',
     color: '#ff5e3a',
     emoji: '∫',
-    topics: ['integrals', 'series'],
+    topics: ['integrals', 'fundamental-theorem', 'series'],
   },
 ]
 
