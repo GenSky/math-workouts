@@ -3,19 +3,22 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { getLesson, lessonsForSubject } from '../data/lessons/index.js'
 import { getSubject } from '../data/subjects.js'
+import { missingPrereqs } from '../lib/prereqs.js'
 import { useProgress } from '../context/ProgressContext.jsx'
 import MaxSays from './MaxSays.jsx'
 import WorkedExample from './WorkedExample.jsx'
 import ProblemCard from './ProblemCard.jsx'
 import Checkpoint from './Checkpoint.jsx'
 import RewardScreen from './RewardScreen.jsx'
+import PrereqPanel from './PrereqPanel.jsx'
+import PathBanner from './PathBanner.jsx'
 
 const STAGES = ['Hook', 'Analogy', 'Worked Example', 'Your Turn', 'Checkpoint', 'Reward']
 
 export default function LessonViewer() {
   const { lessonId } = useParams()
   const navigate = useNavigate()
-  const { completeLesson } = useProgress()
+  const { completeLesson, completedLessons } = useProgress()
   const lesson = getLesson(lessonId)
 
   const [stage, setStage] = useState(0)
@@ -50,6 +53,7 @@ export default function LessonViewer() {
   }
 
   const allSolved = lesson.yourTurn.every((p) => solvedSet.has(p.id))
+  const hasMissingPrereqs = missingPrereqs(lesson.id, completedLessons).length > 0
 
   function go(n) {
     setStage(n)
@@ -109,15 +113,24 @@ export default function LessonViewer() {
           {/* 1 — HOOK */}
           {stage === 0 && (
             <div className="space-y-4">
+              <PathBanner currentLessonId={lesson.id} />
               <MaxSays tone="info" speakText={lesson.hook}>
                 {lesson.hook}
               </MaxSays>
-              <p className="text-sm text-ghost">
-                That nagging real-world question? By the end of this lesson, you'll answer it in your
-                sleep. Let's build the idea from scratch.
-              </p>
-              <button onClick={() => go(1)} className="brutal-btn-lime w-full">
-                Show me the trick →
+              {lesson.plainIdea && (
+                <div className="brutal-box border-gold p-4">
+                  <div className="mb-1 font-mono text-[10px] uppercase tracking-widest text-gold">
+                    In plain words
+                  </div>
+                  <p className="text-[15px] leading-relaxed">{lesson.plainIdea}</p>
+                </div>
+              )}
+              <PrereqPanel lesson={lesson} />
+              <button
+                onClick={() => go(1)}
+                className={`${hasMissingPrereqs ? 'brutal-btn-ghost border-2' : 'brutal-btn-lime'} w-full`}
+              >
+                {hasMissingPrereqs ? 'I know this stuff — dive in anyway →' : 'Show me the trick →'}
               </button>
             </div>
           )}
@@ -126,6 +139,21 @@ export default function LessonViewer() {
           {stage === 1 && (
             <div className="space-y-4">
               <MaxSays speakText={lesson.analogy.analogy}>{lesson.analogy.analogy}</MaxSays>
+              {lesson.vocab?.length > 0 && (
+                <div className="brutal-box p-4">
+                  <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-gold">
+                    Words to know — plain English, no gatekeeping
+                  </div>
+                  <dl className="space-y-2.5">
+                    {lesson.vocab.map((v) => (
+                      <div key={v.term} className="border-l-2 border-gold pl-3">
+                        <dt className="font-display text-sm text-gold">{v.term}</dt>
+                        <dd className="text-sm leading-relaxed text-ghost">{v.means}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
               <div className="brutal-box border-electric p-4">
                 <div className="mb-1 font-mono text-[10px] uppercase tracking-widest text-electric">
                   Now the math

@@ -7,6 +7,29 @@ export default {
   icon: '📈',
   estMinutes: 12,
   tagline: 'y = mx + b — where you start, and how fast you climb.',
+  prereqs: ['one-step-equations'],
+
+  plainIdea:
+    'Every straight line has a two-number ID: where it starts (the y-intercept, b) and how steeply it climbs (the slope, m). Write them as y = mx + b and you can draw — or predict — the whole line.',
+
+  vocab: [
+    {
+      term: 'slope (m)',
+      means: 'The steepness: how much the line climbs for each step right. Slope 2 = up 2 for every 1 across. Negative slope = downhill.',
+    },
+    {
+      term: 'y-intercept (b)',
+      means: 'Where the line crosses the vertical y-axis — its value when x = 0. Your starting point.',
+    },
+    {
+      term: 'coordinates (x, y)',
+      means: 'A point\'s address on the graph: x = how far right/left, y = how far up/down. (3, 7) means right 3, up 7.',
+    },
+    {
+      term: 'rise over run',
+      means: 'How slope is measured: the climb (rise) divided by the sideways step (run) between any two points on the line.',
+    },
+  ],
 
   hook: "A streaming service charges $5 just to sign up, then $2 per month. Plot your total cost over time and you get a straight line. Where it starts and how steep it rises is the entire story — and y = mx + b tells it.",
 

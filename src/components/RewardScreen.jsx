@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
-import { maxLessonXp } from '../data/lessons/index.js'
+import { useNavigate } from 'react-router-dom'
+import { getLesson, maxLessonXp } from '../data/lessons/index.js'
+import { learningPath } from '../lib/prereqs.js'
 import { useProgress } from '../context/ProgressContext.jsx'
 import { PASS_THRESHOLD } from '../data/subjects.js'
 import MaxSays from './MaxSays.jsx'
@@ -7,12 +9,29 @@ import StreakFlame from './StreakFlame.jsx'
 import XPBar from './XPBar.jsx'
 
 // Section 6 — XP + streak reward. Celebrates the completion, shows the
-// checkpoint score, the streak, and routes onward.
+// checkpoint score, the streak, and routes onward. When the learner is on a
+// catch-up path, this screen is the trail marker: next stop, or the summit.
 export default function RewardScreen({ lesson, result, nextLesson, onNext, onHome }) {
-  const { streak } = useProgress()
+  const navigate = useNavigate()
+  const { streak, pathTarget, completedLessons, clearPath } = useProgress()
   const pct = Math.round((result.correct / result.total) * 100)
   const passed = pct >= PASS_THRESHOLD * 100
   const earnedXp = maxLessonXp(lesson) // upper bound; exact XP already banked live
+
+  // Catch-up path state (completedLessons already includes this lesson).
+  const target = pathTarget ? getLesson(pathTarget) : null
+  const remaining = target ? learningPath(pathTarget, completedLessons) : []
+  const summitReached = target && remaining.length === 0
+  const nextOnPath = target && remaining.length > 0 ? remaining[0] : null
+
+  function continuePath() {
+    navigate(`/lesson/${nextOnPath.id}`)
+  }
+
+  function finishPath(fn) {
+    clearPath()
+    fn()
+  }
 
   return (
     <div className="space-y-5 text-center">
@@ -35,6 +54,30 @@ export default function RewardScreen({ lesson, result, nextLesson, onNext, onHom
           ? `${pct}% on the checkpoint — that's a pass and then some. You didn't just memorize it, you GET it. That's the difference.`
           : `${pct}% this round. Honest truth: you need ${PASS_THRESHOLD * 100}% to bank the win. But you finished, and every rep counts. Run it back and it'll click.`}
       </MaxSays>
+
+      {/* Catch-up path progress */}
+      {summitReached && (
+        <div className="border-2 border-gold bg-gold/10 p-4 text-left">
+          <div className="mb-1 font-mono text-[10px] uppercase tracking-widest text-gold">
+            🏔 Catch-up path complete
+          </div>
+          <p className="text-sm leading-relaxed">
+            THAT was the summit. You didn't skip to {target.title} — you built the whole staircase
+            up to it, concept by concept. That knowledge is load-bearing now. Respect.
+          </p>
+        </div>
+      )}
+      {nextOnPath && (
+        <div className="border-2 border-gold bg-gold/10 p-4 text-left">
+          <div className="mb-1 font-mono text-[10px] uppercase tracking-widest text-gold">
+            🧗 Path to {target.icon} {target.title}
+          </div>
+          <p className="text-sm leading-relaxed">
+            One stop banked. {remaining.length} to go — next up:{' '}
+            <span className="text-gold">{nextOnPath.title}</span>.
+          </p>
+        </div>
+      )}
 
       {/* Stat tiles */}
       <div className="grid grid-cols-3 gap-2">
@@ -74,12 +117,35 @@ export default function RewardScreen({ lesson, result, nextLesson, onNext, onHom
       </div>
 
       <div className="flex flex-col gap-2">
-        <button onClick={onNext} className="brutal-btn-lime w-full">
-          {nextLesson ? `Next: ${nextLesson.title} →` : 'Back to subject →'}
-        </button>
-        <button onClick={onHome} className="brutal-btn-ghost w-full">
-          Dashboard
-        </button>
+        {nextOnPath ? (
+          <>
+            <button onClick={continuePath} className="brutal-btn-lime w-full">
+              🧗 Continue path: {nextOnPath.title} →
+            </button>
+            {/* Pausing keeps the path — the dashboard offers a resume banner. */}
+            <button onClick={onHome} className="brutal-btn-ghost w-full">
+              Pause the path — Dashboard
+            </button>
+          </>
+        ) : summitReached ? (
+          <>
+            <button onClick={() => finishPath(onNext)} className="brutal-btn-lime w-full">
+              {nextLesson ? `Keep rolling: ${nextLesson.title} →` : 'Back to subject →'}
+            </button>
+            <button onClick={() => finishPath(onHome)} className="brutal-btn-ghost w-full">
+              Dashboard
+            </button>
+          </>
+        ) : (
+          <>
+            <button onClick={onNext} className="brutal-btn-lime w-full">
+              {nextLesson ? `Next: ${nextLesson.title} →` : 'Back to subject →'}
+            </button>
+            <button onClick={onHome} className="brutal-btn-ghost w-full">
+              Dashboard
+            </button>
+          </>
+        )}
       </div>
     </div>
   )
