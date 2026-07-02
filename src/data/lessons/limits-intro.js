@@ -2,7 +2,7 @@
 export default {
   id: 'limits-intro',
   subjectId: 'pre-calculus',
-  order: 2,
+  order: 4,
   title: 'Limits: The Art of Getting Close',
   icon: '🚶',
   estMinutes: 11,

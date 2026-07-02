@@ -2,7 +2,7 @@
 export default {
   id: 'pythagoras',
   subjectId: 'geometry',
-  order: 2,
+  order: 3,
   title: 'Pythagoras: The Shortcut Theorem',
   icon: '🧭',
   estMinutes: 11,

@@ -2,12 +2,12 @@
 export default {
   id: 'standard-deviation',
   subjectId: 'statistics',
-  order: 2,
+  order: 3,
   title: 'Standard Deviation: The Spread',
   icon: '📏',
   estMinutes: 12,
   tagline: 'The average distance from the average. How wild is your data?',
-  prereqs: ['fractions-disguise', 'exponents'],
+  prereqs: ['mean-median-mode', 'exponents'],
 
   plainIdea:
     'Standard deviation measures how SPREAD OUT a set of numbers is — roughly, the typical distance of the data points from their average. Small SD: everything huddles near the mean. Big SD: the data is all over the place.',

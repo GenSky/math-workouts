@@ -2,7 +2,7 @@
 export default {
   id: 'series',
   subjectId: 'calculus-2',
-  order: 2,
+  order: 3,
   title: 'Series: Adding Forever',
   icon: '🪜',
   estMinutes: 12,
